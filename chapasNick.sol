@@ -13,16 +13,15 @@ contract ChapasNick {
 
     mapping (string => Chapa) chapas;
 
-    function ChapasNick() {
+    constructor() public{
         chairperson = msg.sender;
     }
 
-    function newChapa(string newemail) {
+    function newChapa(string memory newemail) public{
         require((msg.sender == chairperson) && !chapas[newemail].used);
         numChapas++;
 
-        voters[voter].weight = 1;
-        Chapa chapa = chapas[newemail];
+        Chapa storage chapa = chapas[newemail];
         chapa.beneficiary = msg.sender;
         chapa.used = true;
         chapa.ip = "127.0.0.1";
